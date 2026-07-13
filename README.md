@@ -1,3 +1,7 @@
+## Acknowledgements
+
+This project is based on the SpiderBot_DeepRL project by arijit-dasgupta and has been modified and extended for learning and experimentation.
+
 # **SpiderBot_DeepRL**
 Title: **Implementation of Single and Multi-Agent Deep Reinforcement Learning Algorithms for a Walking Spider Robot**
 Authors(s): [Arijit Dasgupta](https://github.com/arijitnoobstar), [Chong Yu Quan](https://github.com/mion666459)
