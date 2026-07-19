@@ -1,8 +1,3 @@
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-# SpiderBot_Train_Model.py 									  #
-# Author(s): Chong Yu Quan, Arijit Dasgupta 				  #
-# Email(s): chong.yuquan@u.nus.edu, arijit.dasgupta@u.nus.edu #
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 """
 This script is responsible for the training for the spiderbot RL agent.

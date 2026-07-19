@@ -1,8 +1,4 @@
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-# SpiderBot_Validation.py                                        #
-# Author(s): Chong Yu Quan, Arijit Dasgupta                   #
-# Email(s): chong.yuquan@u.nus.edu, arijit.dasgupta@u.nus.edu #
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
 
 """
 In this script, you can test & observe the performance of a model in validation-mode.
@@ -53,11 +49,11 @@ time_step_size = 120./240,
 joint_limit_lower = joint_limit_lower, 
 joint_limit_upper = joint_limit_upper,
 joint_velocities = joint_velocities,
-discount_rate = None,
-lr_actor = None,
-lr_critic = None, 
+discount_rate = 0.9,
+lr_actor = 0.00005,
+lr_critic = 0.0001, 
 target_location = target_location, 
-tau = None, 
+tau = 0.005, 
 max_mem_size = 1000000,
 batch_size = None,
 noise = None,
@@ -77,3 +73,4 @@ goal_reward = None,
 out_of_range_penalty = None
 )
 
+input("Press Enter to exit")

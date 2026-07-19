@@ -132,10 +132,17 @@ class p_gym:
         observation = np.concatenate((base_position, base_orientation, base_lin_velocity, base_ang_velocity), axis = None)
         
         # obtain observations for each link of spiderbot
-        link_data = np.array(p.getLinkStates(self.spiderbot_id, list(range(self.num_of_joints)), computeLinkVelocity = 1)) 
+        link_data = p.getLinkStates(
+    self.spiderbot_id,
+    list(range(self.num_of_joints)),
+    computeLinkVelocity=1
+) 
         
         # obtain observations for each joint of spiderbot
-        joint_data = np.array(p.getJointStates(self.spiderbot_id, list(range(self.num_of_joints))))
+        joint_data = p.getJointStates(
+    self.spiderbot_id,
+    list(range(self.num_of_joints))
+)
         
         # iterate over all links/joint
         for joint_id in range(self.num_of_joints):
@@ -161,8 +168,15 @@ class p_gym:
             local_ang_velocity = np.array(link_data[joint_id][7])
             
             # concatenate and flatten observations 
-            observation = np.concatenate((observation, joint_position, joint_velocity, local_com_position, 
-                                          local_orientation, local_lin_velocity, local_ang_velocity), axis = None)
+            observation = np.concatenate((
+    observation,
+    np.array([joint_position]),
+    np.array([joint_velocity]),
+    local_com_position,
+    local_orientation,
+    local_lin_velocity,
+    local_ang_velocity
+), axis=None)
         
         return observation
         
@@ -193,10 +207,16 @@ class p_gym:
                     leg_joint_id.append(self.ord_joints_name.index(joint))
                     
             # obtain observations for each link of specific leg
-            link_data = np.array(p.getLinkStates(self.spiderbot_id, leg_joint_id, computeLinkVelocity = 1)) 
-            
-            # obtain observations for each joint of specific leg
-            joint_data = np.array(p.getJointStates(self.spiderbot_id, leg_joint_id))
+            link_data = p.getLinkStates(
+                self.spiderbot_id,
+    leg_joint_id,
+    computeLinkVelocity=1
+)
+
+            joint_data = p.getJointStates(
+    self.spiderbot_id,
+    leg_joint_id
+)
             
             # iterate over relevant joint ids 
             for index in range(len(leg_joint_id)):

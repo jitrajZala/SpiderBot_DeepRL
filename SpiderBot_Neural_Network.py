@@ -23,8 +23,11 @@ class fc_block(tf.keras.layers.Layer):
         super(fc_block, self).__init__()
         
         # add dense layer attribute with L2 Regulariser
-        self.dense = tf.keras.layers.Dense(h_units, use_bias = False, kernel_regularizer = 
-                                            tf.keras.regularizers.l2(l = weight_decay))
+        self.dense = tf.keras.layers.Dense(
+    h_units,
+    use_bias=False,
+    kernel_regularizer=tf.keras.regularizers.l2(weight_decay)
+    )
         
         # add batch norm layer attribute
         self.batch_norm = tf.keras.layers.BatchNormalization()

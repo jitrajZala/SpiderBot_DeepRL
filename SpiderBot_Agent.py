@@ -916,7 +916,17 @@ class Agent:
             for x in range(self.num_of_legs):
 
                 self.q_eval_list[x].save_weights(self.q_eval_list[x].checkpoint_path)
-        
+
+    def _restore_model_from_checkpoint(self, model, checkpoint_path):
+        """Restore weights from a Keras or TensorFlow checkpoint path."""
+        try:
+            model.load_weights(checkpoint_path).expect_partial()
+        except ValueError as e:
+            if "File format not supported" in str(e) or "Unsupported file format" in str(e):
+                tf.train.Checkpoint(model = model).restore(checkpoint_path).expect_partial()
+            else:
+                raise
+
     def load_all_models(self):
         
         """ load weights for all models """
@@ -950,10 +960,10 @@ class Agent:
         elif self.model == "DDPG":
             
             # load weights for each actor, target_actor, critic, target_critic model
-            self.DDPG_Actor.load_weights(self.DDPG_Actor.checkpoint_path).expect_partial()
-            self.DDPG_Target_Actor.load_weights(self.DDPG_Target_Actor.checkpoint_path).expect_partial()
-            self.DDPG_Critic.load_weights(self.DDPG_Critic.checkpoint_path).expect_partial()
-            self.DDPG_Target_Critic.load_weights(self.DDPG_Target_Critic.checkpoint_path).expect_partial()
+            self._restore_model_from_checkpoint(self.DDPG_Actor, self.DDPG_Actor.checkpoint_path)
+            self._restore_model_from_checkpoint(self.DDPG_Target_Actor, self.DDPG_Target_Actor.checkpoint_path)
+            self._restore_model_from_checkpoint(self.DDPG_Critic, self.DDPG_Critic.checkpoint_path)
+            self._restore_model_from_checkpoint(self.DDPG_Target_Critic, self.DDPG_Target_Critic.checkpoint_path)
 
         # for mad3qn 
         elif self.model == "MAD3QN":
@@ -961,4 +971,4 @@ class Agent:
             # load weights for each q_eval model
             for x in range(self.num_of_legs):
 
-                self.q_eval_list[x].load_weights(self.q_eval_list[x].checkpoint_path).expect_partial()
+                self._restore_model_from_checkpoint(self.q_eval_list[x], self.q_eval_list[x].checkpoint_path)
